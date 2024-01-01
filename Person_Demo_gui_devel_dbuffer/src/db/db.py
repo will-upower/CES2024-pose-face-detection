@@ -32,13 +32,15 @@ class DB:
         self.face_data = get_mmap(
             'face_data.dat', np.float32, (args.max_people, NUM_FEATURE_VEC, 512))
         self.face_mask = get_mmap(
-            'face_mask.dat', np.bool, (args.max_people, NUM_FEATURE_VEC))
+            # 'face_mask.dat', np.bool, (args.max_people, NUM_FEATURE_VEC))
+            'face_mask.dat', bool, (args.max_people, NUM_FEATURE_VEC))
         self.pose_data = get_mmap(
             'pose_data.dat', np.float32, (args.max_people, 17, 2), -1)
         self.voice_data = get_mmap(
             'voice_data.dat', np.float32, (args.max_people, 512))
         self.voice_mask = get_mmap(
-            'voice_mask.dat', np.bool, (args.max_people,))
+            # 'voice_mask.dat', np.bool, (args.max_people,))
+            'voice_mask.dat', bool, (args.max_people,))
         self.last_time = get_mmap(
             'last_time.dat', np.float32, (args.max_people,))
 
