@@ -1,0 +1,115 @@
+   21  pip3 install scipy
+   22  pip3 install addict
+   23  pip3 install tensorboard
+   24  pip3 install pycocotools
+   25  pip3 install onnx
+   26  pip3 install onnx-simplifier
+   27  pip3 install thop
+   62  pi3 install -r requirements.txt 
+   63  pip3 install -r requirements.txt 
+   65  pip3 install torchvision
+   67  pip3 uninstall torchvision
+   74  pip3 install torchvision-0.13.0-cp310-cp310-manylinux2014_aarch64.whl 
+   76  pip3 install torchvision-0.13.0-cp39-cp39-manylinux2014_aarch64.whl
+   77  pip3 install torchvision-0.13.0-cp38-cp38-manylinux2014_aarch64.whl 
+   79  pip3 install torchvision-0.13.0-cp38-cp38-manylinux2014_aarch64.whl 
+   99  pip3 uninstall torchvision
+  102  pip3 install torchvision=0.12.0
+  103  pip3 install torchvision==0.12.0
+  105  pip3 uninstall torchvision
+  114  sudo python3 setup.py install
+  118  python3 setup.py install
+  121  python3 setup.py install
+  122  sudo python3 setup.py install
+  130  sudo python3 setup.py install
+  131  sudo python setup.py install
+  132  python3 setup.py install
+  133  sudo python3 setup.py install
+  142  sudo apt-get install libjpeg-dev zlib1g-dev
+  143  sudo python3 setup.py install
+  144  python3 setup.py install
+  153  python3 setup.py install
+  155  python3 setup.py install
+  168  sudo python setup.py install
+  169  sudo python3 setup.py install
+  171  sudo python3 setup.py install
+  174  python3 setup.py install
+  175  sudo chmod 777 /usr/local/lib/python3.8/dist-packages/test-easy-install-27582.write-test
+  179  python3 setup.py install
+  182  python3 setup.py install
+  316  pip3 uninstall onnxruntime
+  317  pip3 uninstall onnxruntime-gpu
+  318  pip3 install onnxruntime-gpu
+  319  pip3 install onnxruntime
+  321  pip3 install onnxruntime-gpu
+  328  pip3 uninstall onnxruntime
+  330  pip3 install onnxruntime_gpu-1.4.0-cp36-cp36m-linux_aarch64.whl
+  332  pip3 install onnxruntime_gpu-1.4.0-cp36-cp38m-linux_aarch64.whl
+  333  pip3 install onnxruntime_gpu-1.4.0-cp38-cp38m-linux_aarch64.whl
+  334  python3 -m pip install onnxruntime_gpu-1.4.0-cp38-cp38m-linux_aarch64.whl
+  435  sudo apt install build-essential libssl-dev
+  448  sudo make install
+  461  pip3 install onnx
+  520  make install
+  521  sudo make install
+  526  make install
+  541  pip3 install -r requirements.txt
+  543  pip3 install seaborn
+  544  pip install seaborn
+  606  sudo apt-get install libopencv-core-dev
+  633  make install
+  743  sudo apt install ./code_1.85.1-1702461056_arm64.deb 
+  782  sudo apt install python3.8-venv
+  788  pip install --upgrade pip
+  792  pip install requirements.txt 
+  793  pip install -r requirements.txt 
+  812  pip install psutil
+  815  pip install pyopencl
+  816  sudo pip install pyopencl
+  817  pip3 install pyopencl
+  819  pip install torch
+  821  pip install torch===1.5.0 cudatoolkit=11.4.0
+  822  pip install torch===1.5.0 cudatoolkit==11.4.0
+  823  conda install pytorch==1.4.0 cudatoolkit=10.1 -c pytorch
+  824  pip install pytorch==1.4.0 cudatoolkit=10.1 -c pytorch
+  825  pip install torch==1.7.0 torchvision==0.8.0 torchaudio==0.7.0
+  826  pip install torch==1.9.0 torchvision==0.8.0 torchaudio==0.7.0
+  827  pip install torch==1.9.0
+  829  pip uninstall torch
+  830  pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+  836  pip install torch==1.7.1+cu110 torchvision==0.8.2+cu110 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
+  837  pip install torch==1.7.1 torchvision==0.8.2+cu110 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
+  842  pip install --upgrade --force-reinstall torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
+  845  pip3 install --upgrade --force-reinstall torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
+  847  pip3 install cuda-python
+  853  pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117 
+  854  pip install --no-cache-dir torch torchvision torchaudio
+  855  pip3 install --no-cache-dir torch torchvision torchaudio
+  857  $ sudo apt install cuda-toolkit-11-4
+  858  sudo apt install cuda-toolkit-11-4
+  859  sudo apt install cuda-toolkit-11-7
+  863  conda install pytorch torchvision cudatoolkit=11.4-c pytorch
+  870  sudo apt-get install -y make build-essential libssl-dev zlib1g-dev \
+  871  sudo apt-get install -y make build-essential libssl-dev zlib1g-dev
+  872  sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev libgdbm-dev libnss3-dev libedit-dev libc6-dev
+  880  sudo make altinstall
+  910  scp -r upower@192.168.100.121:~/Downloads/driving/demo/install_text_files
+  911  scp -r upower@192.168.100.121:~/Downloads/driving/demo/install_text_files .
+  912  scp -r upower@192.168.100.121:~/Downloads/Driving/demo/install_text_files .
+  914  cd install_text_files/
+  916  code cli\ install.txt 
+  921  pip install reqs2.txt
+  924  sudo apt install python3-pip
+  933  pip install reqs2.txt 
+  934  pip install -r reqs2.txt 
+  938  python3 -m pip install --version
+  939  python3 -m pip3 install --version
+
+###### KAI START HERE #####
+
+  989  sudo apt install openssh-server 
+ 1000  pip install pyaudio
+ 1001  sudo apt install portaudio19-dev python3-pyaudio
+ 1002  pip install pyaudio
+ 1011  history | grep install
+ 1020  history | grep install > ces24histJetsonO.txt
