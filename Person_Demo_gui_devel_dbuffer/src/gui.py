@@ -29,9 +29,9 @@ user_action = {
     5: 'Hello! Wave your right hand.'
 }
 
-CONTI_LOGO_PATH = Path.cwd().joinpath('logoImg', 'conti_logo')
-MICRON_LOGO_PATH = Path.cwd().joinpath('logoImg')
-GAME_IMG_PATH = Path.cwd().joinpath('gameImg')
+# CONTI_LOGO_PATH = Path.cwd().joinpath('logoImg', 'conti_logo')
+# MICRON_LOGO_PATH = Path.cwd().joinpath('logoImg')
+# GAME_IMG_PATH = Path.cwd().joinpath('gameImg')
 
 # Face ID checking = 1 time per position
 FACEID_TESTCOUNT    = 1
@@ -51,58 +51,58 @@ class GUI:
         yres, xres = vid.res
 
         # Setup audio capture
-        if not self.disable_speech:
-            mic = Mic(args)
-            mic.start()
-            self.mic = mic
+        # if not self.disable_speech:
+        #     mic = Mic(args)
+        #     mic.start()
+        #     self.mic = mic
 
-        # Continental logo image
-        self.logoC = []
-        # Continental logo mask
-        self.logoCMsk = []
-        # Continental logo negative mask
-        self.logoCNegMsk = []
+        # # Continental logo image
+        # self.logoC = []
+        # # Continental logo mask
+        # self.logoCMsk = []
+        # # Continental logo negative mask
+        # self.logoCNegMsk = []
 
         # 36 Conti logo and mask, negative mask loading
-        for i in range(36):
-            logoFileName = CONTI_LOGO_PATH.joinpath(str(i * 10) + ".png")
-            orgLogo = cv2.imread(str(logoFileName), cv2.IMREAD_UNCHANGED)
+        # for i in range(36):
+        #     logoFileName = CONTI_LOGO_PATH.joinpath(str(i * 10) + ".png")
+        #     orgLogo = cv2.imread(str(logoFileName), cv2.IMREAD_UNCHANGED)
 
-            maxValue = np.max(orgLogo[:, :, 3])
-            if maxValue == 0:
-                maskMat = np.float32(orgLogo[:, :, 3])
-            else:
-                maskMat = np.float32(orgLogo[:, :, 3]) / maxValue
+        #     maxValue = np.max(orgLogo[:, :, 3])
+        #     if maxValue == 0:
+        #         maskMat = np.float32(orgLogo[:, :, 3])
+        #     else:
+        #         maskMat = np.float32(orgLogo[:, :, 3]) / maxValue
 
-            self.logoCMsk.append(
-                np.zeros(
-                    (maskMat.shape[0], maskMat.shape[1], 3)))
-            self.logoCMsk[i][:, :, 0] = maskMat
-            self.logoCMsk[i][:, :, 1] = maskMat
-            self.logoCMsk[i][:, :, 2] = maskMat
-            self.logoCNegMsk.append(np.float32( np.ones(self.logoCMsk[i].shape)))
-            self.logoCNegMsk[i] = self.logoCNegMsk[i] - self.logoCMsk[i]
-            self.logoC.append(orgLogo[:, :, :3])
+        #     self.logoCMsk.append(
+        #         np.zeros(
+        #             (maskMat.shape[0], maskMat.shape[1], 3)))
+        #     self.logoCMsk[i][:, :, 0] = maskMat
+        #     self.logoCMsk[i][:, :, 1] = maskMat
+        #     self.logoCMsk[i][:, :, 2] = maskMat
+        #     self.logoCNegMsk.append(np.float32( np.ones(self.logoCMsk[i].shape)))
+        #     self.logoCNegMsk[i] = self.logoCNegMsk[i] - self.logoCMsk[i]
+        #     self.logoC.append(orgLogo[:, :, :3])
 
-        # Logo and instructionimage loading
-        self.logoM, self.logoMMsk, self.logoMNegMsk = self.image_msk_negmsk_load( MICRON_LOGO_PATH.joinpath("micron_transparent.png"))
-        self.miniHW, self.miniHWMsk, self.miniHWNegMsk = self.image_msk_negmsk_load( MICRON_LOGO_PATH.joinpath("minion_handwave.png"))
-        self.miniSg, self.miniSgMsk, self.miniSgNegMsk = self.image_msk_negmsk_load( MICRON_LOGO_PATH.joinpath("minion_sing.png"))
-        self.miniPs, self.miniPsMsk, self.miniPsNegMsk = self.image_msk_negmsk_load( MICRON_LOGO_PATH.joinpath("minion_pose.png"))
+        # # Logo and instructionimage loading
+        # self.logoM, self.logoMMsk, self.logoMNegMsk = self.image_msk_negmsk_load( MICRON_LOGO_PATH.joinpath("micron_transparent.png"))
+        # self.miniHW, self.miniHWMsk, self.miniHWNegMsk = self.image_msk_negmsk_load( MICRON_LOGO_PATH.joinpath("minion_handwave.png"))
+        # self.miniSg, self.miniSgMsk, self.miniSgNegMsk = self.image_msk_negmsk_load( MICRON_LOGO_PATH.joinpath("minion_sing.png"))
+        # self.miniPs, self.miniPsMsk, self.miniPsNegMsk = self.image_msk_negmsk_load( MICRON_LOGO_PATH.joinpath("minion_pose.png"))
 
-        # Free run image loading
-        self.freeRunImg = []
-        self.freeRunImg.append(cv2.imread(str(MICRON_LOGO_PATH.joinpath("Demo0001_500.png"))))
-        self.freeRunImg.append(cv2.imread(str(MICRON_LOGO_PATH.joinpath("Demo0002_500.png"))))
-        self.freeRunImg.append(cv2.imread(str(MICRON_LOGO_PATH.joinpath("Demo0003_500.png"))))
-        self.freeRunImg.append(cv2.imread(str(MICRON_LOGO_PATH.joinpath("Demo0004_500.png"))))
-        self.freeRunCnt = 0
+        # # Free run image loading
+        # self.freeRunImg = []
+        # self.freeRunImg.append(cv2.imread(str(MICRON_LOGO_PATH.joinpath("Demo0001_500.png"))))
+        # self.freeRunImg.append(cv2.imread(str(MICRON_LOGO_PATH.joinpath("Demo0002_500.png"))))
+        # self.freeRunImg.append(cv2.imread(str(MICRON_LOGO_PATH.joinpath("Demo0003_500.png"))))
+        # self.freeRunImg.append(cv2.imread(str(MICRON_LOGO_PATH.joinpath("Demo0004_500.png"))))
+        # self.freeRunCnt = 0
 
-        # Game image loading
-        self.ImgFly, self.ImgFlyMsk, self.ImgFlyNegMsk = self.image_msk_negmsk_load( GAME_IMG_PATH.joinpath("icon_fly2.png"), 60, 60)
-        self.ImgFlyHit, self.ImgFlyHitMsk, self.ImgFlyHitNegMsk = self.image_msk_negmsk_load( GAME_IMG_PATH.joinpath("icon_flyhit.png"), 100, 100)
-        self.ImgHammerR, self.ImgHammerRMsk, self.ImgHammerRNegMsk = self.image_msk_negmsk_load( GAME_IMG_PATH.joinpath("icon_toyhammer.png"), 100, 100)
-        self.ImgHammerL, self.ImgHammerLMsk, self.ImgHammerLNegMsk = self.image_msk_negmsk_load( GAME_IMG_PATH.joinpath("icon_toyhammerl.png"), 100, 100)
+        # # Game image loading
+        # self.ImgFly, self.ImgFlyMsk, self.ImgFlyNegMsk = self.image_msk_negmsk_load( GAME_IMG_PATH.joinpath("icon_fly2.png"), 60, 60)
+        # self.ImgFlyHit, self.ImgFlyHitMsk, self.ImgFlyHitNegMsk = self.image_msk_negmsk_load( GAME_IMG_PATH.joinpath("icon_flyhit.png"), 100, 100)
+        # self.ImgHammerR, self.ImgHammerRMsk, self.ImgHammerRNegMsk = self.image_msk_negmsk_load( GAME_IMG_PATH.joinpath("icon_toyhammer.png"), 100, 100)
+        # self.ImgHammerL, self.ImgHammerLMsk, self.ImgHammerLNegMsk = self.image_msk_negmsk_load( GAME_IMG_PATH.joinpath("icon_toyhammerl.png"), 100, 100)
 
         colorgen = RandomColor(1)
         jt_color = colorgen.generate( luminosity='light', count=len(jnt_info), format_='rgbArray')
@@ -138,8 +138,8 @@ class GUI:
         self.disable_speech = args.disable_speech
 
         # Start CLI
-        self.cli = CLI(self.db)
-        self.cli.start()
+        # self.cli = CLI(self.db)
+        #self.cli.start()
         self.last_face_run = 0
         self.proc_queue = proc_queue
         self.lock = Lock()
@@ -158,9 +158,9 @@ class GUI:
         self.worker_faceDtrack = Thread(target=self.thread_faced_tracking, args=(self.proc_queue.queue_faceD_track,))
         self.worker_faceID_voice_overlay = Thread(target=self.thread_faceID_voice, args=(self.proc_queue.queue_faceID_voice,))
 
-        self.logoCnt = 0
-        self.enable_flygame = args.enable_fly
-        self.flyGame = flyGame
+        # self.logoCnt = 0
+        # self.enable_flygame = args.enable_fly
+        # self.flyGame = flyGame
 
         self.faceIDRetrySize    = args.faceretry_size
         self.faceIDRetryPos     = args.faceretry_pos
@@ -174,21 +174,21 @@ class GUI:
         self.testCCount         = 0
         """
 
-    def image_msk_negmsk_load(self, filename, height=0, width=0):
-        orgImg = cv2.imread(str(filename), cv2.IMREAD_UNCHANGED)
+    # def image_msk_negmsk_load(self, filename, height=0, width=0):
+    #     orgImg = cv2.imread(str(filename), cv2.IMREAD_UNCHANGED)
 
-        if height > 0 or width > 0:
-            orgImg = cv2.resize(orgImg, (height, width))
+    #     if height > 0 or width > 0:
+    #         orgImg = cv2.resize(orgImg, (height, width))
 
-        maskMat = np.float32(orgImg[:, :, 3]) / np.max(orgImg[:, :, 3])
-        mskImg = np.zeros((maskMat.shape[0], maskMat.shape[1], 3))
-        mskImg[:, :, 0] = maskMat
-        mskImg[:, :, 1] = maskMat
-        mskImg[:, :, 2] = maskMat
-        negMskImg = np.float32(np.ones(mskImg.shape)) - mskImg
-        orgImg = orgImg[:, :, :3]
+    #     maskMat = np.float32(orgImg[:, :, 3]) / np.max(orgImg[:, :, 3])
+    #     mskImg = np.zeros((maskMat.shape[0], maskMat.shape[1], 3))
+    #     mskImg[:, :, 0] = maskMat
+    #     mskImg[:, :, 1] = maskMat
+    #     mskImg[:, :, 2] = maskMat
+    #     negMskImg = np.float32(np.ones(mskImg.shape)) - mskImg
+    #     orgImg = orgImg[:, :, :3]
 
-        return orgImg, mskImg, negMskImg
+    #     return orgImg, mskImg, negMskImg
 
     # @profile
     def __call__(self):
@@ -204,7 +204,7 @@ class GUI:
 
             try:
                 self.proc_queue.queue_posemodel.put(
-                    (frame, frame_rgb, pose_frame), timeout=3)
+                    (frame, frame_rgb, pose_frame), timeout=5)
             except Exception as e:
                 if self.end:
                     pass
@@ -230,7 +230,7 @@ class GUI:
             # HW Accelerator owner change : Face id, voice thread
             try:
                 self.proc_queue.queue_posepostproc.put(
-                    (frame, frame_rgb, hms, jms), timeout=2)
+                    (frame, frame_rgb, hms, jms), timeout=5)
             except BaseException:
                 if self.end:
                     pass
@@ -243,7 +243,7 @@ class GUI:
             people, heatmap = self.pose_estimator.pose_postproc_fnc( ih, iw, hms, jms, people_prev)
             people_prev = people
             try:
-                self.proc_queue.queue_faceD_track.put( (frame, frame_rgb, people, heatmap), timeout=1)
+                self.proc_queue.queue_faceD_track.put( (frame, frame_rgb, people, heatmap), timeout=5)
             except BaseException:
                 if self.end:
                     pass
@@ -256,7 +256,7 @@ class GUI:
             tracks = self.tracker.update(faces, self.recording)
             try:
                 self.proc_queue.queue_faceID_voice.put(
-                    (frame, tracks, people, heatmap), timeout=1)
+                    (frame, tracks, people, heatmap), timeout=5)
             except Exception as e:
                 if self.end:
                     pass
@@ -532,7 +532,7 @@ class GUI:
                 if needUIDRearrange is True:
                     self.rearrange_track_uids(tracks)
         try:
-            self.render_queue.put((np.array(frame), np.array(people), tracks, heatmap), timeout=1)
+            self.render_queue.put((np.array(frame), np.array(people), tracks, heatmap), timeout=5)
         except Exception as e:
             if self.end:
                 pass
@@ -863,81 +863,213 @@ class GUI:
         font_scale = 1.2
         font_thickness = 2
 
+        # Title
+        title = "Face ID/ Pose/ Voice recognition with CNN"
+        cv2.putText(overlay, title, (550, 30), font, font_scale,
+                    self.bbox_color, font_thickness, cv2.LINE_AA)
+
+        # code for dispalying user instructions
+        # if instMsgIndex == 0 or instMsgIndex == 1 or instMsgIndex == 4:
+        #     cv2.putText(overlay, user_action[instMsgIndex], (700, 1050), font, font_scale,
+        #                 self.bbox_color, font_thickness, cv2.LINE_AA)
+
+        # Caption display only for "Hand waving", "Voice recording" and "Pose
+        # recording".
+        # if instMsgIndex == 2 or instMsgIndex == 3 or instMsgIndex == 5:
+        #     offsetx = 1000
+        #     offsety = 800
+        #     a3 = np.array([[[offsetx, offsety],
+        #                     [offsetx + 600, offsety],
+        #                     [offsetx + 600, offsety + 30],
+        #                     [offsetx + 620, offsety + 60],
+        #                     [offsetx + 580, offsety + 50],
+        #                     [offsetx, offsety + 50]]], dtype=np.int32)
+        #     cv2.fillPoly(overlay, a3, (0, 172, 254))   # Conti color
+        #     cv2.putText(overlay, user_action[instMsgIndex], (offsetx + 10, offsety + 40), font, font_scale,
+        #                 (255, 255, 255), font_thickness, cv2.LINE_AA)
+
+        # # Iconic image display
+        # if instMsgIndex == 5:     # Hand wave icon drawing
+        #     posImg = (
+        #         (overlay.shape[1] - self.miniHW.shape[1]),
+        #         (overlay.shape[0] - self.miniHW.shape[0]))
+        #     bkgImage = overlay[posImg[1]:posImg[1] + self.miniHW.shape[0],
+        #                        posImg[0]:posImg[0] + self.miniHW.shape[1]]
+
+        #     bkgImage = np.uint16(
+        #         (bkgImage * self.miniHWNegMsk) + (self.miniHW * self.miniHWMsk))
+        #     overlay[posImg[1]:posImg[1] + self.miniHW.shape[0],
+        #             posImg[0]:posImg[0] + self.miniHW.shape[1]] = bkgImage
+        # elif instMsgIndex == 2:   # Voice recording icon drawing
+        #     posImg = (
+        #         (overlay.shape[1] - self.miniSg.shape[1]),
+        #         (overlay.shape[0] - self.miniSg.shape[0]))
+        #     bkgImage = overlay[posImg[1]:posImg[1] + self.miniSg.shape[0],
+        #                        posImg[0]:posImg[0] + self.miniSg.shape[1]]
+
+        #     bkgImage = np.uint16(
+        #         (bkgImage * self.miniSgNegMsk) + (self.miniSg * self.miniSgMsk))
+        #     overlay[posImg[1]:posImg[1] + self.miniSg.shape[0],
+        #             posImg[0]:posImg[0] + self.miniSg.shape[1]] = bkgImage
+        # elif instMsgIndex == 3:   # Pose recording icon drawing
+        #     posImg = (
+        #         (overlay.shape[1] - self.miniPs.shape[1]),
+        #         (overlay.shape[0] - self.miniPs.shape[0]))
+        #     bkgImage = overlay[posImg[1]:posImg[1] + self.miniPs.shape[0],
+        #                        posImg[0]:posImg[0] + self.miniPs.shape[1]]
+
+        #     bkgImage = np.uint16(
+        #         (bkgImage * self.miniPsNegMsk) + (self.miniPs * self.miniPsMsk))
+        #     overlay[posImg[1]:posImg[1] + self.miniPs.shape[0],
+        #             posImg[0]:posImg[0] + self.miniPs.shape[1]] = bkgImage
+
         font_scale = 1.0
         infoOffset = 800
 
-        
+        # FPS
+        fps = "FPS          : {:02d}".format(int(fps))
+        cv2.putText(overlay, fps, (50, infoOffset), font, font_scale,
+                    self.bbox_color, font_thickness, cv2.LINE_AA)
+        infoOffset += 40
 
-        # Game condition update and display
-        if self.enable_flygame:
-            if self.recording and self.flyGame.faceFeatComplete == False:
-                useLeftHammer = False
-                # If fly is on left side
-                if self.flyGame.flyPos[0] > (1980 / 2):
-                    # Hammer is on left hand.
-                    handPos = self.flyGame.leftHandPos
-                    ImgShape = self.ImgHammerL.shape
-                    useLeftHammer = True
-                # if fly is on right side
-                else:
-                    # Hammer is on right hand.
-                    handPos = self.flyGame.rightHandPos
-                    ImgShape = self.ImgHammerR.shape
+        # Add number of users in DB
+        user_in_db = "People in DB : {:03d}".format(self.numOfUsers)
+        cv2.putText(overlay, user_in_db, (50, infoOffset), font,
+                    font_scale, self.bbox_color, font_thickness, cv2.LINE_AA)
+        infoOffset += 40
 
-                # Hammer display
-                lowerBound = ((int(ImgShape[0] / 2), int(ImgShape[1] / 2)))
-                upperBound = (
-                    overlay.shape[1] - int(ImgShape[0] / 2), overlay.shape[0] - int(ImgShape[1] / 2))
+        # CPU occupancy
+        cpuOccup = "CPU          : {:03.2f} %".format(psutil.cpu_percent())
+        cv2.putText(overlay, cpuOccup, (50, infoOffset), font,
+                    font_scale, self.bbox_color, font_thickness, cv2.LINE_AA)
+        infoOffset += 40
 
-                if ((handPos[0] >= lowerBound[0]) and
-                    (handPos[1] >= lowerBound[1]) and
-                    (handPos[0] <= upperBound[0]) and
-                        (handPos[1] <= upperBound[1])):
-                    posImg = (handPos[0] - int(ImgShape[0] / 2),
-                              handPos[1] - int(ImgShape[1] / 2))
-                    bkgImage = overlay[posImg[1]:posImg[1] +
-                                       ImgShape[1], posImg[0]:posImg[0] + ImgShape[0]]
-                    if useLeftHammer is True:
-                        bkgImage = np.uint16(
-                            (bkgImage * self.ImgHammerLNegMsk) + (self.ImgHammerL * self.ImgHammerLMsk))
-                    else:
-                        bkgImage = np.uint16(
-                            (bkgImage * self.ImgHammerRNegMsk) + (self.ImgHammerR * self.ImgHammerRMsk))
-                    overlay[posImg[1]:posImg[1] + ImgShape[1],
-                            posImg[0]:posImg[0] + ImgShape[0]] = bkgImage
+        # Pose model execution time
+        poseMTime = "Pose model  : {:04.2f} ms".format(
+            self.pose_estimator.time_model * 1000)
+        cv2.putText(overlay, poseMTime, (50, infoOffset), font,
+                    font_scale, self.bbox_color, font_thickness, cv2.LINE_AA)
+        infoOffset += 40
 
-                # Fly display
-                isFlyDead, isHit = self.flyGame.update(handPos)
-                flyPos = self.flyGame.getFlyDispPos()
+        # Face model execution time
+        faceIDMTime = "Face model  : {:04.2f} ms".format(
+            self.face_identifier.time_model * 1000)
+        cv2.putText(overlay, faceIDMTime, (50, infoOffset), font,
+                    font_scale, self.bbox_color, font_thickness, cv2.LINE_AA)
+        infoOffset += 40
 
-                if isHit is True:
-                    self.flyGame.flyCatched = True
+        # Face model execution time
+        if not self.disable_speech:
+            voiceMTime = "Voice model : {:04.2f} ms".format(
+                self.voice_identifier.time_model * 1000)
+            cv2.putText(
+                overlay,
+                voiceMTime,
+                (50, infoOffset),
+                font,
+                font_scale,
+                self.bbox_color,
+                font_thickness,
+                cv2.LINE_AA)
 
-                if isFlyDead == False:
-                    ImgShape = self.ImgFly.shape
-                else:
-                    ImgShape = self.ImgFlyHit.shape
-                posImg = (flyPos[0] - int(ImgShape[0] / 2),
-                          flyPos[1] - int(ImgShape[1] / 2))
-                bkgImage = overlay[posImg[1]:posImg[1] +
-                                   ImgShape[1], posImg[0]:posImg[0] + ImgShape[0]]
+        # Skip drawing if logo spin angle is 90 or 270.
+        # if self.logoCnt != 9 and self.logoCnt != 27:
+        #     # Add conti/micron logo (x, y)
+        #     # Logo position in frame
+        #     posImg = (np.uint8((300 - self.logoC[self.logoCnt].shape[1]) / 2), 0)
 
-                if isFlyDead == False:
-                    bkgImage = np.uint16((bkgImage * self.ImgFlyNegMsk) + (self.ImgFly * self.ImgFlyMsk))
-                else:
-                    strCatchTime = "{:02.3f} sec".format(
-                        self.flyGame.catchTime)
-                    bkgImage = np.uint16(
-                        (bkgImage * self.ImgFlyHitNegMsk) + (self.ImgFlyHit * self.ImgFlyHitMsk))
-                    cv2.putText(    overlay,
-                                    strCatchTime,
-                                    (flyPos[0] - 50, flyPos[1] - 50),
-                                    font,
-                                    font_scale,
-                                    (0, 165, 255),
-                                    font_thickness,
-                                    cv2.LINE_AA)
-                overlay[posImg[1]:posImg[1] + ImgShape[1], posImg[0]:posImg[0] + ImgShape[0]] = bkgImage
+        #     # Conti logo overlay
+
+        #     bkgImage = overlay[posImg[1]:posImg[1] + self.logoC[self.logoCnt].shape[0],
+        #                        posImg[0]:posImg[0] + self.logoC[self.logoCnt].shape[1]]
+
+        #     bkgImage = np.uint16((bkgImage * self.logoCNegMsk[self.logoCnt]) +
+        #                          (self.logoC[self.logoCnt] * self.logoCMsk[self.logoCnt]))
+        #     overlay[posImg[1]:posImg[1] + self.logoC[self.logoCnt].shape[0],
+        #             posImg[0]:posImg[0] + self.logoC[self.logoCnt].shape[1]] = bkgImage
+
+        # self.logoCnt = (self.logoCnt + 1) % 36
+
+        # # Micron logo overlay
+        # posImg = ((overlay.shape[1] - self.logoM.shape[1]), 0)
+        # bkgImage = overlay[posImg[1]:posImg[1] + self.logoM.shape[0],
+        #                    posImg[0]:posImg[0] + self.logoM.shape[1]]
+
+        # bkgImage = np.uint16((bkgImage * self.logoMNegMsk) +
+        #                      (self.logoM * self.logoMMsk))
+        # overlay[posImg[1]:posImg[1] + self.logoM.shape[0],
+        #         posImg[0]:posImg[0] + self.logoM.shape[1]] = bkgImage
+
+        # # # Game condition update and display
+        # if self.enable_flygame:
+        #     if self.recording and self.flyGame.faceFeatComplete == False:
+        #         useLeftHammer = False
+        #         # If fly is on left side
+        #         if self.flyGame.flyPos[0] > (1980 / 2):
+        #             # Hammer is on left hand.
+        #             handPos = self.flyGame.leftHandPos
+        #             ImgShape = self.ImgHammerL.shape
+        #             useLeftHammer = True
+        #         # if fly is on right side
+        #         else:
+        #             # Hammer is on right hand.
+        #             handPos = self.flyGame.rightHandPos
+        #             ImgShape = self.ImgHammerR.shape
+
+        #         # Hammer display
+        #         lowerBound = ((int(ImgShape[0] / 2), int(ImgShape[1] / 2)))
+        #         upperBound = (
+        #             overlay.shape[1] - int(ImgShape[0] / 2), overlay.shape[0] - int(ImgShape[1] / 2))
+
+        #         if ((handPos[0] >= lowerBound[0]) and
+        #             (handPos[1] >= lowerBound[1]) and
+        #             (handPos[0] <= upperBound[0]) and
+        #                 (handPos[1] <= upperBound[1])):
+        #             posImg = (handPos[0] - int(ImgShape[0] / 2),
+        #                       handPos[1] - int(ImgShape[1] / 2))
+        #             bkgImage = overlay[posImg[1]:posImg[1] +
+        #                                ImgShape[1], posImg[0]:posImg[0] + ImgShape[0]]
+        #             if useLeftHammer is True:
+        #                 bkgImage = np.uint16(
+        #                     (bkgImage * self.ImgHammerLNegMsk) + (self.ImgHammerL * self.ImgHammerLMsk))
+        #             else:
+        #                 bkgImage = np.uint16(
+        #                     (bkgImage * self.ImgHammerRNegMsk) + (self.ImgHammerR * self.ImgHammerRMsk))
+        #             overlay[posImg[1]:posImg[1] + ImgShape[1],
+        #                     posImg[0]:posImg[0] + ImgShape[0]] = bkgImage
+
+        #         # Fly display
+        #         isFlyDead, isHit = self.flyGame.update(handPos)
+        #         flyPos = self.flyGame.getFlyDispPos()
+
+        #         if isHit is True:
+        #             self.flyGame.flyCatched = True
+
+        #         if isFlyDead == False:
+        #             ImgShape = self.ImgFly.shape
+        #         else:
+        #             ImgShape = self.ImgFlyHit.shape
+        #         posImg = (flyPos[0] - int(ImgShape[0] / 2),
+        #                   flyPos[1] - int(ImgShape[1] / 2))
+        #         bkgImage = overlay[posImg[1]:posImg[1] +
+        #                            ImgShape[1], posImg[0]:posImg[0] + ImgShape[0]]
+
+        #         if isFlyDead == False:
+        #             bkgImage = np.uint16((bkgImage * self.ImgFlyNegMsk) + (self.ImgFly * self.ImgFlyMsk))
+        #         else:
+        #             strCatchTime = "{:02.3f} sec".format(
+        #                 self.flyGame.catchTime)
+        #             bkgImage = np.uint16(
+        #                 (bkgImage * self.ImgFlyHitNegMsk) + (self.ImgFlyHit * self.ImgFlyHitMsk))
+        #             cv2.putText(    overlay,
+        #                             strCatchTime,
+        #                             (flyPos[0] - 50, flyPos[1] - 50),
+        #                             font,
+        #                             font_scale,
+        #                             (0, 165, 255),
+        #                             font_thickness,
+        #                             cv2.LINE_AA)
+        #         overlay[posImg[1]:posImg[1] + ImgShape[1], posImg[0]:posImg[0] + ImgShape[0]] = bkgImage
 
         """
         # Free run image display (In case of no recording)

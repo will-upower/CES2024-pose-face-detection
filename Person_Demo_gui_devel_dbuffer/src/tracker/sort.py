@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.optimize import linear_sum_assignment
 
-from .ciou import iou
+from .iou import iou
 from .kalman import KalmanBoxTracker
 
 KalmanBoxTracker.time_since_update = 1

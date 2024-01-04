@@ -4,7 +4,7 @@ from torch import nn
 from torchvision.models import resnet
 import time
 
-from ..fwdnxt import FWDNXT
+# from ..fwdnxt import FWDNXT
 
 
 class SpeechIdentifier:

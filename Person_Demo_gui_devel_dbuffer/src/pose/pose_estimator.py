@@ -1,4 +1,4 @@
-from ..fwdnxt import FWDNXT
+# from ..fwdnxt import FWDNXT
 import time
 
 import numpy as np

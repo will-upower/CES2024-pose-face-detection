@@ -5,7 +5,7 @@ import numpy as np
 import cv2
 import torch
 
-from ..fwdnxt import FWDNXT
+# from ..fwdnxt import FWDNXT
 from .models.model_irse import IR_50 as Model
 from .models.model_irse import l2_norm
 

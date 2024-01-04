@@ -3,7 +3,7 @@ from ctypes import *
 import numpy as np
 from numpy.ctypeslib import as_ctypes
 from numpy.ctypeslib import ndpointer
-#f = CDLL("./src/fwdnxt/libfwdnxt_dbuffer.so")
+f = CDLL("./src/fwdnxt/libfwdnxt_dbuffer.so")
 
 # Allows None to be passed instead of a ndarray
 
