@@ -521,9 +521,9 @@ class GUI:
         while True:
             frame, people, tracks, heatmap = q.get()
             key = self.render_overlay(frame, people, tracks, heatmap, mmap_file_inference)
-            #if key == ord('q'):
-            #    self.end = True
-            #    break
+            if key == ord('q'):
+                self.end = True
+                break
         #cv2.destroyAllWindows()
 
     def __del__(self):
@@ -774,6 +774,6 @@ class GUI:
         mmap_file_inference.write(disFrame.data)
 
         # debug output for display connected to orin
-        cv2.imshow(self.name, disFrame)
+        #cv2.imshow(self.name, disFrame)
 
         return cv2.waitKey(5)
