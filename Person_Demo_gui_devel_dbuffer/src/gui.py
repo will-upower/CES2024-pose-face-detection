@@ -35,7 +35,7 @@ user_action = {
 
 # Face ID checking = 1 time per position
 FACEID_TESTCOUNT    = 1
-
+TIMEOUT_LENGTH      = 15
 
 class GUI:
 
@@ -204,7 +204,7 @@ class GUI:
 
             try:
                 self.proc_queue.queue_posemodel.put(
-                    (frame, frame_rgb, pose_frame), timeout=5)
+                    (frame, frame_rgb, pose_frame), timeout=TIMEOUT_LENGTH)
             except Exception as e:
                 if self.end:
                     pass
@@ -230,7 +230,7 @@ class GUI:
             # HW Accelerator owner change : Face id, voice thread
             try:
                 self.proc_queue.queue_posepostproc.put(
-                    (frame, frame_rgb, hms, jms), timeout=5)
+                    (frame, frame_rgb, hms, jms), timeout=TIMEOUT_LENGTH)
             except BaseException:
                 if self.end:
                     pass
@@ -243,7 +243,7 @@ class GUI:
             people, heatmap = self.pose_estimator.pose_postproc_fnc( ih, iw, hms, jms, people_prev)
             people_prev = people
             try:
-                self.proc_queue.queue_faceD_track.put( (frame, frame_rgb, people, heatmap), timeout=5)
+                self.proc_queue.queue_faceD_track.put( (frame, frame_rgb, people, heatmap), timeout=TIMEOUT_LENGTH)
             except BaseException:
                 if self.end:
                     pass
@@ -256,7 +256,7 @@ class GUI:
             tracks = self.tracker.update(faces, self.recording)
             try:
                 self.proc_queue.queue_faceID_voice.put(
-                    (frame, tracks, people, heatmap), timeout=5)
+                    (frame, tracks, people, heatmap), timeout=TIMEOUT_LENGTH)
             except Exception as e:
                 if self.end:
                     pass
@@ -292,8 +292,8 @@ class GUI:
                 for trk in tracks:
                     if trk.waved and trk.set_recording(True):
                         self.recording = trk.id
-                        if self.enable_flygame:
-                            self.flyGame.initGame()
+                        # if self.enable_flygame:
+                        #     self.flyGame.initGame()
                         break
 
             if self.recording:
@@ -323,12 +323,12 @@ class GUI:
                 # 4. Feature vectors for person are not all occupied.
                 run_faceid = run_faceid and (self.last_face_run < 1) and np.any(
                     self.db.face_mask[trk.uid] == 0)
-                if self.enable_flygame:
-                    run_faceid = run_faceid and self.flyGame.flyCatched
+                # if self.enable_flygame:
+                #     run_faceid = run_faceid and self.flyGame.flyCatched
 
                 if run_faceid:
-                    if self.enable_flygame:
-                        self.flyGame.flyCatched = False
+                    # if self.enable_flygame:
+                    #     self.flyGame.flyCatched = False
                     # Don't run face id for the next 5 frames
                     self.last_face_run = 5
 
@@ -532,7 +532,7 @@ class GUI:
                 if needUIDRearrange is True:
                     self.rearrange_track_uids(tracks)
         try:
-            self.render_queue.put((np.array(frame), np.array(people), tracks, heatmap), timeout=5)
+            self.render_queue.put((np.array(frame), np.array(people), tracks, heatmap), timeout=TIMEOUT_LENGTH)
         except Exception as e:
             if self.end:
                 pass
@@ -838,20 +838,20 @@ class GUI:
             # Get recording person's left/right hand position
             if trk.id == self.recording:
                 # Capture left/right hand position
-                if self.enable_flygame:
-                    self.flyGame.leftHandPos = np.array(
-                        (-1, -1)).astype(np.int16)
-                    self.flyGame.rightHandPos = np.array(
-                        (-1, -1)).astype(np.int16)
-                    self.flyGame.leftHandPos = trk.last_pose[9]
-                    self.flyGame.rightHandPos = trk.last_pose[10]
+                # if self.enable_flygame:
+                #     self.flyGame.leftHandPos = np.array(
+                #         (-1, -1)).astype(np.int16)
+                #     self.flyGame.rightHandPos = np.array(
+                #         (-1, -1)).astype(np.int16)
+                #     self.flyGame.leftHandPos = trk.last_pose[9]
+                #     self.flyGame.rightHandPos = trk.last_pose[10]
 
-                    if trk.complete_feats == False:
-                        self.flyGame.faceFeatComplete = False
-                    else:
-                        self.flyGame.faceFeatComplete = True
+                #     if trk.complete_feats == False:
+                #         self.flyGame.faceFeatComplete = False
+                #     else:
+                #         self.flyGame.faceFeatComplete = True
 
-                    self.flyGame.avoidFace(bbox)
+                #     self.flyGame.avoidFace(bbox)
 
         if len(self.time_taken) > 0:
             time_taken = np.mean(self.time_taken)

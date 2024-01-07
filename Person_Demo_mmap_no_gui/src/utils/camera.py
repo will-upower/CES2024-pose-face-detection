@@ -72,22 +72,6 @@ class Camera:
         self.frame_rgb  = frame_rgb
         self.pose_frame = pose_frame
 
-    """
-    # Still images test
-    def updateInput(self, i):
-        with self.lock2:
-            self.testImg    = None
-            self.testImg    = cv2.imread(self.fname[i])
-            self.testImg    = cv2.resize(self.testImg, (1920, 1080))
-
-    def getTestImgList(self, path):
-        imgList = []        
-        for filename in Path(path).rglob('*.jpg'):
-            imgList.append(str(filename))
-
-        return sorted(imgList)
-    """
-
     def start(self):
         if self.started:
             return
@@ -170,9 +154,6 @@ class Camera:
     def sharedMread(self):
         self.mmFrameBGR.seek(0)
         recImg  = np.frombuffer(self.mmFrameBGR, dtype=np.uint8).reshape((720, 1280, 3))
-
-        # resized_Img = cv2.resize(recImg, (1080, 1920), interpolation=cv2.INTER_LINEAR)
-        # cv2.imwrite("filename.png", recImg)
         return True, recImg  
 
     def stop(self):
@@ -180,31 +161,8 @@ class Camera:
             return
         self.started = False
         self.thread.join()
-        # self.vid.release()
 
     def __del__(self, **kwargs):
         os.close(self.f_frame_BGR)
-        mmap_v4h_path.close()
+        self.mmFrameBGR.close()
         self.stop()
-
-
-
-
-# if __name__ == "__main__":
-#     s = Camera(0, False)
-#     s.start()
-#     while True:
-#         ret, frame, _, _ = s.read()
-
-#         if not ret:
-#             break
-
-#         # cv2.imshow('frame', frame)
-
-#         write_to_mmap()
-
-#         if cv2.waitKey(10) == ord('q'):
-#             break
-
-#     s.stop()
-#     cv2.destroyAllWindows()

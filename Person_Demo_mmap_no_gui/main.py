@@ -7,7 +7,6 @@ from pathlib import Path
 from src.db import DB
 from src.face import FaceDetector, FaceIdentifier
 # kaneeun fly catch game
-from src.flygame import FlyCatchGame
 from src.gui import GUI
 from src.pose import PoseEstimator
 from src.proc_queue import ProcQueue
@@ -118,10 +117,6 @@ def main():
         action='store_true',
         help="Disable Voice Detection")
     parser.add_argument(
-        '--enable-fly',
-        action='store_true',
-        help="Enable the fly game")
-    parser.add_argument(
         '--faceretry-size',
         default=0.2,
         type=float,
@@ -174,9 +169,6 @@ def main():
     # Tracker
     tracker             = Sort(max_age=15 if args.device == 'fie' else 30, min_hits=1, max_people=args.max_people)
 
-    # Game
-    flyGame             = FlyCatchGame()
-
     # GUI
     gui                 = GUI(              args, 
                                             db, 
@@ -185,8 +177,7 @@ def main():
                                             face_identifier, 
                                             voice_identifier, 
                                             tracker, 
-                                            proc_queue,
-                                            flyGame)
+                                            proc_queue)
     gui()
 
 
