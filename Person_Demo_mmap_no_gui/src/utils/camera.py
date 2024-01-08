@@ -115,7 +115,7 @@ class Camera:
                     uMatFrame   = cv2.resize(uMatFrame, (frameD[1], frameD[0]))
 
                 # Mirroring
-                uMatFrame       = cv2.flip(uMatFrame, 1)
+                # uMatFrame       = cv2.flip(uMatFrame, 1)
                 uMatFrame_rgb   = cv2.cvtColor(uMatFrame, cv2.COLOR_BGR2RGB)
                 uMatPose_frame  = cv2.resize(uMatFrame_rgb, self.pose_res)
                 uMatPose_frame  = cv2.copyMakeBorder(uMatPose_frame, 12, 12, 0, 0, cv2.BORDER_CONSTANT)
